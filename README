@@ -1,0 +1,3 @@
+Java wrappers for cygwin. The idea: use them as you would java on *nix.
+
+The java utilities on windows accept windows paths, so there's an impedance mismatch if you want to develop on cygwin. These scripts convert the *nix paths to windows paths, and java is happy.
