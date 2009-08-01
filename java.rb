@@ -9,9 +9,13 @@ end
 
 
 def windows_java_args(unixARGV)
-    unixARGV 
-    #TODO: implement jar file path translation
-    #TODO: replace -classpath PATH unix paths with windows paths
+    unixARGV.map do | arg |
+        if arg.include? '/' #if it looks like a path
+            arg = to_winPath(arg).gsub(/\\/,"\\\\\\") #convert it to a windows path
+        else
+            arg = arg
+        end
+    end
 end
 
 def windows_java_command(unixARGV)
@@ -19,8 +23,11 @@ def windows_java_command(unixARGV)
 end
 
 if __FILE__ == $0
-    ENV["CLASSPATH"] = to_winPathList(ENV["CLASSPATH"])
+    ENV["CLASSPATH"] = to_winPath(ENV["CLASSPATH"])
 
-    #run java
-    system(windows_java_command(ARGV))
+    if ARGV.include? "-DEBUG"
+        puts windows_java_command(ARGV)
+    else
+        system(windows_java_command(ARGV))
+    end
 end

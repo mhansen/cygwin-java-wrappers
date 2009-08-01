@@ -6,7 +6,7 @@ def windows_javac_args(unixARGV)
     unixARGV.map do | arg |
         if arg[0] != '-'[0] 
           #need to escape slashes or javac swallows them
-          to_winPath(arg).gsub(/\\/,"\\\\\\") 
+          to_winPath(arg).gsub(/\\/,"\\\\\\")
         else 
           #options like '-d' aren't paths, so don't convert them
           arg
@@ -25,6 +25,10 @@ def windows_javac_command(unixARGV)
 end
 
 if __FILE__ == $0
-    ENV["CLASSPATH"] = to_winPathList(ENV["CLASSPATH"])
-    system(windows_javac_command(ARGV))
+    if ARGV.any? { | arg | arg == "-DEBUG" }
+        puts windows_javac_command(ARGV) #echo the command back for debugging
+    else
+        ENV["CLASSPATH"] = to_winPathList(ENV["CLASSPATH"])
+        system(windows_javac_command(ARGV))
+    end
 end
