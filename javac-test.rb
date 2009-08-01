@@ -22,6 +22,12 @@ class
         assert_equal(expected.split, actual)
     end
 
+    def test_windows_javac_cmd_home
+        expected = "C:\\\\cygwin\\\\home.java"
+        actual = windows_javac_args("/home.java")
+        assert_equal(expected.split, actual)
+    end
+
     def test_windows_javac_cmd_slash
         expected = "wrappers\\\\hello.java"
         actual = windows_javac_args("./wrappers/hello.java")

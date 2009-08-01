@@ -6,7 +6,7 @@ def windows_javac_args(unixARGV)
     unixARGV.map do | arg |
         if arg[0] != '-'[0] 
           #need to escape slashes or javac swallows them
-          to_winPath(arg).sub(/\\/,"\\\\\\") 
+          to_winPath(arg).gsub(/\\/,"\\\\\\") 
         else 
           #options like '-d' aren't paths, so don't convert them
           arg
@@ -26,10 +26,5 @@ end
 
 if __FILE__ == $0
     ENV["CLASSPATH"] = to_winPathList(ENV["CLASSPATH"])
-
-    javac = IO.popen(windows_javac_command(ARGV))
-
-    #wait for javac to finish before exitting
-    #and echo the input
-    puts javac.readlines 
+    system(windows_javac_command(ARGV))
 end
