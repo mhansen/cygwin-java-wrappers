@@ -27,7 +27,7 @@ if __FILE__ == $0
     if ARGV.any? { | arg | arg == "-DEBUG" }
         puts windows_javac_command(ARGV) #echo the command back for debugging
     else
-        ENV["CLASSPATH"] = to_winPathList(ENV["CLASSPATH"])
+        ENV["CLASSPATH"] = to_winPath(ENV["CLASSPATH"])
         system(windows_javac_command(ARGV))
     end
 end
