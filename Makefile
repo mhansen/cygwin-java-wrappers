@@ -6,3 +6,7 @@ install: javac.rb java.rb
 
 clean:
 	rm /usr/bin/javac /usr/bin/java
+
+test:
+	ruby java-test.rb
+	ruby javac-test.rb

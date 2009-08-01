@@ -6,7 +6,7 @@ class
     Javac < Test::Unit::TestCase
     
     def test_pathList
-        expected = "-classpath c:\\\\test;c:\\\\test2"
+        expected = "-classpath c:\\\\test\\;c:\\\\test2"
         actual = windows_javac_args("-classpath /cygdrive/c/test:/cygdrive/c/test2".split)
         assert_equal(expected.split, actual)
     end
