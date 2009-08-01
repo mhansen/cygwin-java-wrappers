@@ -6,5 +6,6 @@ def to_winPath(unixPath, escapeSlashes=true)
       cygpath = "cygpath -w -p"
   end
 
-  cp = IO.popen(cygpath + " " + unixPath).readline.chomp.gsub(/;/,"\\;")
+  #escape slashes and semicolons
+  cp = IO.popen(cygpath + " " + unixPath).readline.chomp.gsub(/\\/,"\\\\\\").gsub(/;/,"\\;")
 end

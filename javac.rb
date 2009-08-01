@@ -5,8 +5,7 @@ require 'paths.rb'
 def windows_javac_args(unixARGV)
     unixARGV.map do | arg |
         if arg[0] != '-'[0] 
-          #need to escape slashes or javac swallows them
-          to_winPath(arg).gsub(/\\/,"\\\\\\")
+          to_winPath(arg)
         else 
           #options like '-d' aren't paths, so don't convert them
           arg

@@ -11,7 +11,7 @@ end
 def windows_java_args(unixARGV)
     unixARGV.map do | arg |
         if arg.include? '/' #if it looks like a path
-            arg = to_winPath(arg).gsub(/\\/,"\\\\\\") #convert it to a windows path
+            arg = to_winPath(arg)#convert it to a windows path
         else
             arg = arg
         end
