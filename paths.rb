@@ -1,11 +1,12 @@
-#converts cygwin paths (or path lists separated by :) to windows paths
+#converts cygwin paths (or path lists separated by :) to windows paths with forward slashes
+#e.g. /cygdrive/c/temp -> c:/temp
 def to_winPath(unixPath, escapeSlashes=true)
-  cygpath = "cygpath -w"
+  cygpath = "cygpath -m"
   isPathList = unixPath.include? ":"
   if (isPathList) 
-      cygpath = "cygpath -w -p"
+      cygpath = "cygpath -m -p"
   end
 
-  #escape slashes and semicolons
-  cp = IO.popen(cygpath + " " + unixPath).readline.chomp.gsub(/\\/,"\\\\\\").gsub(/;/,"\\;")
+  #escape semicolons
+  cp = IO.popen(cygpath + " " + unixPath).readline.chomp.gsub(/;/,"\\;")
 end
