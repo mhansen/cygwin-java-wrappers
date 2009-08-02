@@ -13,10 +13,22 @@ def windows_javac_args(unixARGV)
     end
 end
 
+def ends_with_slash?(path)
+    path =~ /\/$/
+end
+
 def javac_path
-    javacName = "javac.exe"
     javaPath = ENV["JAVA_HOME"]
-    IO.popen("find \"#{javaPath}\" -name #{javacName}").readlines[0].chomp
+    javaBinPath = javaPath + (ends_with_slash?(javaPath) ? "bin/" : "/bin/")
+    javac = javaBinPath + "javac.exe"
+    if File.exists?(javac)
+        javac
+    else
+        puts "Could not find javac.exe."
+        puts "The environment variable JAVA_HOME"
+        puts "does not point at a java installation"
+        Process.exit(-1)
+    end
 end
 
 def windows_javac_command(unixARGV)
