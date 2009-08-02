@@ -1,3 +1,7 @@
 Java wrappers for cygwin. The idea: use them as you would java on *nix.
 
 The java utilities on windows accept windows paths, so there's an impedance mismatch if you want to develop on cygwin. These scripts convert the *nix paths to windows paths, and java is happy.
+
+The script uses the JAVA_HOME environment variable to find your java directory (e.g. /cygdrive/c/program files/java)
+
+Install by running with "make install". Defaults to installing to /usr/bin
